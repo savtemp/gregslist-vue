@@ -17,10 +17,21 @@ const routes = [
     component: loadPage('CarsPage')
   },
   {
+    path: '/houses',
+    name: 'Houses',
+    component: loadPage('HousesPage')
+  },
+  {
     //            v magic strings
     path: '/cars/:carId',
     name: 'Car',
     component: loadPage('CarPage')
+  },
+  {
+    //            v magic strings
+    path: '/houses/:houseId',
+    name: 'House',
+    component: loadPage('HousePage')
   },
   {
     path: '/about',

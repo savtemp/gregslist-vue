@@ -25,6 +25,12 @@
           >
             Cars
           </router-link>
+          <router-link
+            :to="{ name: 'Houses' }"
+            class="btn text-success lighten-30 selectable text-uppercase"
+          >
+            Houses
+          </router-link>
         </li>
         <!-- <li>
           <router-link
