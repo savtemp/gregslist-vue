@@ -40,7 +40,7 @@
 
 <script>
 // FIXME log ref?? 
-import { watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { AppState } from '../AppState.js';
 import { housesService } from '../services/HousesService.js';
 import { logger } from '../utils/Logger.js';

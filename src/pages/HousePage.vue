@@ -10,7 +10,7 @@
         <button class="btn btn-danger" @click="deleteHouse(house)">delete me</button>
       </div>
         <Modal id="house-form">
-        <!-- TODO input house form  -->
+            <HouseForm />
         </Modal>
     </div>
   <div v-else>
@@ -27,41 +27,44 @@ import { AppState } from '../AppState.js';
 import { housesService } from '../services/HousesService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
+import HouseForm from '../components/HouseForm.vue';
 
 export default {
-    setup(){
-        const route = useRoute()
-
-        async function getHouseById(){
+    setup() {
+        const route = useRoute();
+        async function getHouseById() {
             try {
-                await housesService.getHouseById(route.params.houseId)
-            } catch (error) {
-                logger.error('[Get House By Id]', error)
-                Pop.error(error)
+                await housesService.getHouseById(route.params.houseId);
+            }
+            catch (error) {
+                logger.error("[Get House By Id]", error);
+                Pop.error(error);
             }
         }
-
         onMounted(() => {
-            getHouseById()
-        })
-
-        return{
+            getHouseById();
+        });
+        return {
             house: computed(() => AppState.activeHouse),
-            adjustHouse(house){
-                housesService.setActiveHouse(house)
+            adjustHouse(house) {
+                housesService.setActiveHouse(house);
             },
-            async deleteHouse(house){
+            async deleteHouse(house) {
                 try {
-                    const yes = await Pop.confirm('Delete the House?')
-                    if(!yes){return}
-                    await housesService.deleteHouse(house.id)
-                } catch (error) {
-                    logger.error('[Deleting House]', error)
-                    Pop.error(error)
+                    const yes = await Pop.confirm("Delete the House?");
+                    if (!yes) {
+                        return;
+                    }
+                    await housesService.deleteHouse(house.id);
+                }
+                catch (error) {
+                    logger.error("[Deleting House]", error);
+                    Pop.error(error);
                 }
             }
-        }
-    }
+        };
+    },
+    components: { HouseForm }
 }
 </script>
 

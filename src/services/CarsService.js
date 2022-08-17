@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js";
 import { Car } from "../models/Car.js";
+import { logger } from "../utils/Logger.js";
 import { server } from "./AxiosService.js";
 
 class CarsService {
@@ -12,6 +13,7 @@ class CarsService {
 
   async getCars() {
     let res = await server.get('api/cars')
+    logger.log(res.data)
     AppState.cars = res.data.map(c => new Car(c))
   }
 

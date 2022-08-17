@@ -8,14 +8,14 @@
 
 
 <script>
-import { House } from '../models/House.js';
+// import { House } from '../models/House.js';
 import { housesService } from '../services/HousesService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 
 export default {
     props: {
-        house: {type: House, required: true}
+        house: {type: Object, required: true}
     },
     setup(){
         return{

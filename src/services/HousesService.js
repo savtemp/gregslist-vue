@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js";
 import { House } from "../Models/House.js";
+import { logger } from "../utils/Logger.js";
 import { server } from "./AxiosService.js";
 
 
@@ -19,6 +20,7 @@ class HousesService{
 
     async createHouse(houseFormData){
         let res = await server.post('api/houses', houseFormData)
+
         let house = new House(res.data)
         AppState.houses = [...AppState.houses, house]
     }
@@ -35,6 +37,7 @@ class HousesService{
 
     async getHouseById(houseId){
         const res = await server.get(`api/houses/${houseId}`)
+        logger.log('activeHouse', res.data)
         AppState.activeHouse = new House(res.data)
     }
 }

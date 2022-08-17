@@ -2,17 +2,15 @@
     <div class="houses-page">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <!-- TODO insert house card -->
-                    House Card goes here
+                <div class="col-md-4" v-for="h in houses" :key="h.id">
+                    <HouseCard :house="h" />
                 </div>
             </div>
         </div>
         <button class="btn btn-fab btn-primary" title="Add House" data-bs-toggle="modal" data-bs-target="#house-form" @click="setActiveHouse()"><i class="mdi mdi-plus f-18 text-white"></i></button>
     </div>
     <Modal id="house-form">
-        <!-- TODO insert house form  -->
-        House form goes here
+        <HouseForm />
     </Modal>
 </template>
 
@@ -24,29 +22,31 @@ import { AppState } from '../AppState.js';
 import { housesService } from '../services/HousesService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
+import HouseForm from '../components/HouseForm.vue';
+import HouseCard from '../components/HouseCard.vue';
 
 export default {
-    setup(){
-        async function getHouses(){
+    setup() {
+        async function getHouses() {
             try {
-                await housesService.getHouses()
-            } catch (error) {
-                logger.error('[Getting Houses]', error)
-                Pop.error(error)
+                await housesService.getHouses();
+            }
+            catch (error) {
+                logger.error("[Getting Houses]", error);
+                Pop.error(error);
             }
         }
-
         onMounted(() => {
-            getHouses()
-        })
-
-        return{
+            getHouses();
+        });
+        return {
             houses: computed(() => AppState.houses),
-            setActiveHouse(){
-                housesService.setActiveHouse({})
+            setActiveHouse() {
+                housesService.setActiveHouse({});
             }
-        }
-    }
+        };
+    },
+    components: { HouseForm, HouseCard }
 }
 </script>
 

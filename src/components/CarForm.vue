@@ -22,7 +22,7 @@
       <input class="form-control" type="number" min="1000" id="price" name="price" v-model="editable.price">
 
       <label class="form-label" for="img">Image</label>
-      <input class="form-control" type="text" id="img" name="img" v-model="editable.img">
+      <input class="form-control" type="text" id="img" name="img" v-model="editable.imgUrl">
 
       <label class="form-label" for="description">Description</label>
       <textarea class="w-100 form-control" name="description" id="description" rows="5"
